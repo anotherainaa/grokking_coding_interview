@@ -86,11 +86,15 @@ Refactored
 - to avoid repetitive code, as we add characters, we shrink it if it is larger than k
   - whenever the charcters is not larger than k, we will check the longest substring through greedy approach
 
-difference with first algorithm
+Difference with first algorithm
 - make the code dry. 
 - first code has more lines and more opprtunities to have bugs, especially at the end condition.
 - note that we can also use frequency to keep track of existing characters. 
   - the main difference is handling 
+
+Things that could be improved
+- variable names - can use left and right, or windowStart and End to help differentiate the beginngin and end
+- hashMap name can be characterExists or charFrequency
 
 */
 
