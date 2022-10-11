@@ -1,3 +1,7 @@
+package main
+
+import "fmt"
+
 /* use a hash for O(N) space and O(1) time
 
 approach
@@ -23,4 +27,8 @@ func twoSum(nums []int, target int) []int {
 	}
 
 	return []int{0, 0}
+}
+
+func main() {
+	fmt.Println((twoSum([]int{3, 3}, 6)))
 }
