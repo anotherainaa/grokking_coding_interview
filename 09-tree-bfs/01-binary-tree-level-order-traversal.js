@@ -42,10 +42,10 @@ function traverse(root) {
 
   while (queue.length > 0) {
     const levelSize = queue.length;
-    currentLevel = [];
+    const currentLevel = [];
 
     for (let i = 0; i < levelSize; i++) {
-      currentNode = queue.shift();
+      const currentNode = queue.shift();
 
       currentLevel.push(currentNode.val);
 
