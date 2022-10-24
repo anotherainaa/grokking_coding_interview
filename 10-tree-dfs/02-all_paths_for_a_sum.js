@@ -1,5 +1,3 @@
-const Deque = require('../node_modules/collections/deque');
-
 class TreeNode {
   constructor(val) {
     this.val = val;
