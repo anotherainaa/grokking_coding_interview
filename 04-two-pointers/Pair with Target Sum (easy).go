@@ -76,19 +76,18 @@ func findTargetSumIndices(numbers []int, target int) []int {
 	left := 0
 	right := len(numbers) - 1
 
-	for {
-		sum := 0
+	for left < right {
+		// if left > right {
+		// 	break
+		// }
 
-		if left > right {
-			break
-		}
-
-		sum = numbers[left] + numbers[right]
+		sum := numbers[left] + numbers[right]
 
 		if sum == target {
-			indices[0] = left
-			indices[1] = right
-			break
+			// indices[0] = left
+			// indices[1] = right
+			// break
+			return []int{left, right}
 		}
 
 		if sum > target {
