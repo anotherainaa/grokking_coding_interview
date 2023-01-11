@@ -76,7 +76,7 @@ func smallestSubArraySum(numbers []int, target int) int {
 		windowSum += numbers[windowEnd]
 
 		for windowSum >= target {
-			smallest = math.Min(smallest, float64(windowEnd-windowStart+1))
+			smallest = math.Min(smallest, float64(windowEnd-windowStart+1)) // write own Min function?
 			windowSum -= numbers[windowStart]
 			windowStart += 1
 		}
