@@ -96,6 +96,17 @@ Things that could be improved
 - variable names - can use left and right, or windowStart and End to help differentiate the beginngin and end
 - hashMap name can be characterExists or charFrequency
 
+
+araaci
+     a
+  b
+
+max Length = 4
+hash 
+
+c
+i
+wrong answer
 */
 
 function longestDistinctCharsSubstring(chars, k) {

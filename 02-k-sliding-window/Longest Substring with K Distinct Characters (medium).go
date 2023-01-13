@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 Problem Statement
 
@@ -80,19 +82,42 @@ func max(x, y int) int {
 	return x
 }
 
-func longestSubstringWithKChars(chars []string, k int) int {
+func longestSubstringWithKChars(chars string, k int) int {
 	longest := 0
+	windowStart := 0
 
-	substring := ""
+	charFrequency := make(map[string]int)
+
 	for windowEnd := 0; windowEnd < len(chars); windowEnd++ {
-		substring += chars[windowEnd]
+		rightChar := string(chars[windowEnd])
 
-		// Note that checking distinct characters will produce N * N steps
+		_, found := charFrequency[rightChar]
+
+		if found {
+			charFrequency[rightChar] = 0
+		}
+
+		charFrequency[rightChar] += 1
+
+		for len(charFrequency) > k {
+			leftChar := string(chars[windowStart])
+			charFrequency[leftChar] -= 1
+
+			if charFrequency[leftChar] == 0 {
+				delete(charFrequency, leftChar)
+			}
+			windowStart += 1
+
+		}
+
+		longest = max(longest, windowEnd-windowStart+1)
 	}
 
 	return longest
 }
 
 func main() {
-
+	fmt.Println(longestSubstringWithKChars("araaci", 2))
+	fmt.Println(longestSubstringWithKChars("araaci", 1))
+	fmt.Println(longestSubstringWithKChars("cbbebi", 3))
 }
