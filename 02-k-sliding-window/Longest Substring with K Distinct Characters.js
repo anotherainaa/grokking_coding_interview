@@ -109,23 +109,33 @@ i
 wrong answer
 */
 
+
+
 function longestDistinctCharsSubstring(chars, k) {
   let pointerA = 0;
-  let pointerB = 0;
   let longest = 0;
   let charactersObj = {};
 
-  while (pointerA !== chars.length) {
-    charactersObj[chars[pointerA]] = true;
+  for (let pointerB = 0; pointerB < chars.length; pointerB++) {
+    let rightChar = chars[pointerB];
+
+    if (!(rightChar in charactersObj)) {
+      charactersObj[rightChar] = 0;
+    }
+    charactersObj[rightChar] += 1;
 
     while (Object.keys(charactersObj).length > k) {
-      delete charactersObj[chars[pointerB]];
-      pointerB++;
+      const leftChar = chars[pointerA];
+
+      charactersObj[leftChar] -= 1;
+
+      if (charactersObj[leftChar] === 0) {
+        delete charactersObj[leftChar];
+      }
+      pointerA++
     }
 
-    pointerA++
-
-    longest = Math.max(pointerA - pointerB, longest);
+    longest = Math.max(longest, pointerB - pointerA + 1);
   }
 
   return longest;

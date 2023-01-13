@@ -70,7 +70,6 @@ when the hashmap distinct characters is more than K
 - else, we need to keep removing characters (go back to start of this loop) while moving the windowStart
 
 
-
 */
 
 // function for checking longer substring? / compare to length / max
