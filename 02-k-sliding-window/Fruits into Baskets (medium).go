@@ -32,10 +32,7 @@ Approach
 
 the key problem is to make sure that we know how to count unique characters and when to remove it
 from the window. and how to count the max length.
-- this producses O(N + N) - note how we use keys to check where by we have to grab the keys from map every time.
-
-
-
+- this producses O(N + N) because the inner loop only processes each character once.
 
 */
 
