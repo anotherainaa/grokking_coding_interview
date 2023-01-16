@@ -39,17 +39,6 @@ from the window. and how to count the max length.
 
 */
 
-func getKeys(m map[string]int) []string {
-	keys := make([]string, 0, len(m))
-
-	// We only need the keys
-	for key := range m {
-		keys = append(keys, key)
-	}
-
-	return keys
-}
-
 func max(x, y int) int {
 	if x < y {
 		return y
@@ -71,9 +60,8 @@ func fruitBasket(fruits []string) int {
 		}
 
 		fruitFrequency[rightFruit] += 1
-		fruitKeys := getKeys(fruitFrequency)
 
-		for len(fruitKeys) > 2 {
+		for len(fruitFrequency) > 2 {
 			leftFruit := fruits[windowStart]
 			fruitFrequency[leftFruit] -= 1
 
@@ -81,7 +69,6 @@ func fruitBasket(fruits []string) int {
 				delete(fruitFrequency, leftFruit)
 			}
 			windowStart += 1
-			fruitKeys = getKeys(fruitFrequency)
 		}
 
 		maxFruits = max(maxFruits, windowEnd-windowStart+1)
