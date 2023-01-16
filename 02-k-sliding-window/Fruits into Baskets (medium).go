@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 /*
 Problem Statement
 You are visiting a farm to collect fruits. The farm has a single row of fruit trees. You will be given two baskets, and your goal is to pick as many fruits as possible to be placed in the given baskets.
@@ -19,12 +21,76 @@ Explanation: We can put 2 'C' in one basket and one 'A' in the other from the su
 
 - Mental model is to keep picking fruit, if there are 3 unique letters, we gotta remove the one infront.
 
-Data Structure
+Approach
+- create a window, keep adding to window and adding frequency of each fruit
+- if the unique fruit (unique keys) are more than 2
+	- we need to remove the left most fruit
+	- if the left most fruit is 0, remove it from the hashmap(why? this will help with counting unique fruits)
+	- move the start window
+- compare the maximum amount of fruits up until now (greedy approach)
+- return max length
 
-- we return a subarray
-- we can use a variable to count unique characters.
-- we need a hash map to check things at O(1) efficiency.
-- we use the keys to check how many types of fruits do we have.
+the key problem is to make sure that we know how to count unique characters and when to remove it
+from the window. and how to count the max length.
+- this producses O(N + N) - note how we use keys to check where by we have to grab the keys from map every time.
+
+
 
 
 */
+
+func getKeys(m map[string]int) []string {
+	keys := make([]string, 0, len(m))
+
+	// We only need the keys
+	for key := range m {
+		keys = append(keys, key)
+	}
+
+	return keys
+}
+
+func max(x, y int) int {
+	if x < y {
+		return y
+	}
+	return x
+}
+
+func fruitBasket(fruits []string) int {
+	maxFruits := 0
+	windowStart := 0
+	fruitFrequency := make(map[string]int)
+
+	for windowEnd := 0; windowEnd < len(fruits); windowEnd++ {
+		rightFruit := fruits[windowEnd]
+
+		_, found := fruitFrequency[rightFruit]
+		if found {
+			fruitFrequency[rightFruit] = 0
+		}
+
+		fruitFrequency[rightFruit] += 1
+		fruitKeys := getKeys(fruitFrequency)
+
+		for len(fruitKeys) > 2 {
+			leftFruit := fruits[windowStart]
+			fruitFrequency[leftFruit] -= 1
+
+			if fruitFrequency[leftFruit] == 0 {
+				delete(fruitFrequency, leftFruit)
+			}
+			windowStart += 1
+			fruitKeys = getKeys(fruitFrequency)
+		}
+
+		maxFruits = max(maxFruits, windowEnd-windowStart+1)
+	}
+	return maxFruits
+}
+
+func main() {
+	fmt.Println("Hello")
+	fmt.Println(fruitBasket([]string{"A", "B", "C", "A", "C"}))
+	fmt.Println(fruitBasket([]string{"A", "B", "C", "B", "B", "C"}))
+}
