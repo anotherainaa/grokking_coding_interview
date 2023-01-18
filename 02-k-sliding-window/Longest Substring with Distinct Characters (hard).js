@@ -16,6 +16,7 @@ Explanation: The longest substring with distinct characters is "ab".
 
 Key 
 - A character frequency should never go beyond 1, if so we need to subtract left letter until it reaches 1 or less
+- 
 
 
 */
