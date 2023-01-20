@@ -1,4 +1,6 @@
 /*
+https://leetcode.com/problems/find-pivot-index/submissions/881667354/?envType=study-plan&id=level-1
+
 Given an array of integers nums, calculate the pivot index of this array.
 
 The pivot index is the index where the sum of all the numbers strictly to the left of the index is equal to the sum of all the numbers strictly to the index's right.
@@ -53,6 +55,14 @@ Algorith,
 
 Time complexity - O(N2) because we would sum the entired array within a loop
 
+O N + N approach
+- get the sum of the entire array
+- we iterate through the array
+- remove the current item from the total which would equal to the right sum
+- if the right sum is equal to left sum then return index
+- we create a left sum to add up with current item
+
+- return -1
 
 */
 
@@ -64,6 +74,27 @@ var pivotIndex = function(nums) {
         if (leftSum === rightSum) {
             return index;
         }
+    }
+    return -1;
+};
+
+var pivotIndex2 = function(nums) {
+    let rightSum = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        rightSum += nums[i];
+    }
+
+    let leftSum = 0;
+
+    for (let i = 0; i < nums.length; i++) {
+        rightSum -= nums[i];
+        
+        if (rightSum - leftSum === 0) {
+            return i
+        }
+
+        leftSum += nums[i];
     }
     return -1;
 };
